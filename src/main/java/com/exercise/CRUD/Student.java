@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Student {
     @Id
 @GeneratedValue
@@ -18,4 +17,6 @@ public class Student {
     private String name;
     private String surname;
     private boolean isWorking;
+    public Student(String name, String surname, boolean isWorking) {}
 }
+
