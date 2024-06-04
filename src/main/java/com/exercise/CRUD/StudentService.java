@@ -25,18 +25,20 @@ public class StudentService {
     }
 
     public Student updateStudent(Long id, Student updatedStudent) {
-        return studentRepository.findById(id).map(student -> {
-            student.setName(updatedStudent.getName());
-            student.setSurname(updatedStudent.getSurname());
-            return studentRepository.save(student);
-        }).orElseThrow(() -> new RuntimeException("Student not found with id " + id));
+        Student student;
+        if (studentRepository.findById(id).isPresent()) student = studentRepository.findById(id).get();
+        else throw new RuntimeException("Student not found with id " + id);
+        student.setName(updatedStudent.getName());
+        student.setSurname(updatedStudent.getSurname());
+        return studentRepository.save(student);
     }
 
     public Student updateIsWorking(Long id, boolean isWorking) {
-        return studentRepository.findById(id).map(student -> {
-            student.setWorking(isWorking);
-            return studentRepository.save(student);
-        }).orElseThrow(() -> new RuntimeException("Student not found with id " + id));
+        Student student;
+        if (studentRepository.findById(id).isPresent()) student = studentRepository.findById(id).get();
+        else throw new RuntimeException("Student not found with id " + id);
+        student.setWorking(isWorking);
+        return studentRepository.save(student);
     }
 
     public void deleteStudent(Long id) {
