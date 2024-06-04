@@ -11,7 +11,6 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-
     public Student createStudent(Student student) {
         return studentRepository.save(student);
     }
@@ -43,5 +42,9 @@ public class StudentService {
 
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
+    }
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 }
